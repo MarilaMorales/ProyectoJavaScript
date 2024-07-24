@@ -1,0 +1,24 @@
+document.getElementById("loginUsuarios").onsubmit = function (event) {
+    event.preventDefault();
+    validarLogin();
+};
+
+
+function validarLogin() {
+    let correoLog = document.getElementById("correoLog").value;
+    let contrasenaLog = document.getElementById("contrasenaLog").value;
+   
+    let user = JSON.parse(localStorage.getItem(correoLog));
+
+    if (user=== null) {
+        loginError.textContent="Usuario no encontrado";
+        return;
+    }
+    if (user.contrasena1 !== contrasenaLog) {
+        loginError.textContent="Contraseña Incorrecta";
+        
+        return;
+    } else {
+         window.location.href = "C:/Users/mgonz/Desktop/Progra/Javascript/ProyectoJavaScript/Index-Principal/Index.html"
+    }
+}
