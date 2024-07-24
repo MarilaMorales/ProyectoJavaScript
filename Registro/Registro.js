@@ -19,7 +19,7 @@ let user = {
     contrasena1: contrasena2
 };
    
-console.log(user);
+// console.log(user);
 
 localStorage.setItem(correo2, JSON.stringify(user));   
 

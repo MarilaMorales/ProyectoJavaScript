@@ -1,5 +1,6 @@
 
-.navContenedor ul{
-    width: 70%;
- background-color: red;
+.navContenedor {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
 }

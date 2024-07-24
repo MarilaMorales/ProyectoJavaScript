@@ -10,7 +10,7 @@ document.getElementById("loginUsuarios").onsubmit = function (event) {
 
 function validarLogin() {
     let correoLog = document.getElementById("correoLog").value;
-    let contrasenaLog = document.getElementById("contrasenaLog").value;
+    let contrasenaLog = document.getElementById("{contrasenaLog}").value;
    
     let user = JSON.parse(localStorage.getItem(correoLog));
 
