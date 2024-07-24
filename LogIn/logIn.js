@@ -1,6 +1,10 @@
+
+
+
 document.getElementById("loginUsuarios").onsubmit = function (event) {
     event.preventDefault();
     validarLogin();
+    
 };
 
 
@@ -19,6 +23,7 @@ function validarLogin() {
         
         return;
     } else {
-         window.location.href = "C:/Users/mgonz/Desktop/Progra/Javascript/ProyectoJavaScript/Index-Principal/Index.html"
+        
+        window.location.href = "../Index-Principal/Index.html"
     }
 }
