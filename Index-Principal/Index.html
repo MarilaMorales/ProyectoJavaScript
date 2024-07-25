@@ -5,42 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto JavaScript</title>
     <link rel="stylesheet" href="Style-Principal.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-   
-<div class="titulo">
-    <h1 id="titulo1">Administración</h1>
-</div>
+    
+    <h1>  Administración</h1>
 
 
-<div class="navContenedor">
-    <div class="tabNavegador my-5">
-        <nav>
-            <div class="nav-nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-Evento" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> Eventos </button>
-                <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-Tareas" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> Tareas </button>
+<div class="container mt-5">
+    <div class="tabNavegador">
+        <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="nav-Eventos-tab" data-toggle="tab" href="#nav-Eventos" role="tab" aria-controls="nav-Eventos" aria-selected="true">Eventos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-Tareas-tab" data-toggle="tab" href="#nav-Tareas" role="tab" aria-controls="nav-Tareas" aria-selected="false">Tareas</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="nav-tabContent"> 
+            <div class="tab-pane fade show active" id="nav-Eventos" role="tabpanel" aria-labelledby="nav-Eventos-tab">
+                <div class="eventoConteiner">
+
+                    <h2>Eventos</h2>
+                    <div class="eventoConteiner2">
+                        <div class="containerEvento">
+                            <input id="evento" type="text" placeholder="Agregar Evento" required>
+                            <input id="fecha" type="date" required>
+                            <button id="btnAgregarEvento">Agregar Evento</button>
+                        </div>
+            
+                        <div id="contenedorEventos"></div>
+                    </div>
+                </div>
             </div>
-        </nav>
-     
-
-
-
-
+            <div class="tab-pane fade" id="nav-Tareas" role="tabpanel" aria-labelledby="nav-Tareas-tab">
+             
+                <div class="tareasConteiner">
+                    <h2>Tareas</h2>
+                   
+                    <div class="tareasConteiner2">
+                        <div class="containerTareas">
+                            <input id="tarea" type="text" placeholder="Agregar Tareas" required>
+                            <select id="tareaPrioridad" multiple>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                            <button id="btnAgregarTareas">Agregar Tarea</button> 
+                            
+                        </div>
+            
+                        <div id="contenedorTareas"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
-
-
-
-
-
-<script src="Empresa.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+<script src="Style-Principal.css"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
