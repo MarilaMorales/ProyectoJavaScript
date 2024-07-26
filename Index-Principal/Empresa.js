@@ -1,6 +1,9 @@
   
 document.addEventListener("DOMContentLoaded", function() {
     
+    // document.getElementById('btnAgregarEvento').addEventListener('click', agregarEvento); // Asigna la función agregarEvento al botón de agregar evento
+    
+
     function agregarEvento() { // Función para agregar un evento
        
         let eventoInput = document.getElementById("evento").value; // Se obtiene el valor de evento y fecha
@@ -13,7 +16,20 @@ document.addEventListener("DOMContentLoaded", function() {
             let eventoDiv = document.createElement("div");
             eventoDiv.className = "evento";  // Crea un nuevo elemento div para el evento y le crea una clase llamada evento
             eventoDiv.textContent = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput; // IMPORTANTE aqui  le da el nuevo contenido al Div hijo
+            
+                // Crear botón de editar.
+            let btnEditar = document.createElement('button');
+            btnEditar.textContent = 'Editar';
+            
+            btnEditar.addEventListener('click', function() {
+                editarTarea(tareaTexto.textContent);
+            });
+
+            
+            
+            
             contenedorEventos.appendChild(eventoDiv); //Añada el Div hijo al Div Padre.
+
             console.log(eventoInput, fechaEventoInput);
 
             // Limpia los campos de entrada
@@ -29,37 +45,31 @@ document.addEventListener("DOMContentLoaded", function() {
     // Función para agregar una tarea
     function agregarTarea() {
         
-        let tareaInput = document.getElementById('tarea').value;// Obtiene el valor del input de tarea
-        let prioridadesSeleccionadas = Array.from(document.getElementById('prioridadTarea').selectedOptions).map(function(option) {   // Obtiene las opciones seleccionadas del select de prioridades
+        let tareaInput = document.getElementById("tarea").value;// Obtiene el valor del input de tarea
+        let prioridadesSeleccionadas = Array.from(document.getElementById("prioridadTarea").selectedOptions).map(function(option) {   // Obtiene las opciones seleccionadas del select de prioridades
             return option.value;
         });
         
-        let contenedorTareas = document.getElementById('contenedorTareas');// Obtiene el contenedor donde se mostrarán las tareas
+        let contenedorTareas = document.getElementById("contenedorTareas");// Obtiene el contenedor donde se mostrarán las tareas.
 
-        // Verifica que la tarea tenga un valor y que al menos una prioridad esté seleccionada
+        // Verifica que la tarea tenga un valor y que al menos una prioridad esté seleccionada.
         if (tareaInput && prioridadesSeleccionadas.length > 0) {
-            // Crea un nuevo elemento div para la tarea
-            let tareaElemento = document.createElement('div');
-            // Asigna una clase al nuevo div
-            tareaElemento.className = 'tarea';
-            // Establece el contenido de texto del nuevo div
-            tareaElemento.textContent = 'Tarea: ' + tareaInput + ' - Prioridades: ' + prioridadesSeleccionadas.join(', ');
-            // Añade el nuevo div al contenedor de tareas
+            
+            let tareaElemento = document.createElement("div"); // Crea un nuevo elemento div hijo para la tarea.
+            tareaElemento.className = "tarea"; //Se le asigna una clase.
+            tareaElemento.textContent = "Tarea: " + tareaInput + " - Prioridades: " + prioridadesSeleccionadas.join(', '); //Le da al nuevo Div los valores de las prioridades.
             contenedorTareas.appendChild(tareaElemento);
 
-            // Limpia el campo de entrada y deselecciona las opciones del select
-            document.getElementById('tarea').value = '';
-            document.getElementById('prioridadTarea').selectedIndex = -1;
+            
+            document.getElementById("tarea").value = ""; // Limpia el campo de entrada y se quitan las opciones de las prioridades.
+            document.getElementById("prioridadTarea").selectedIndex = -1;
         } else {
-            // Muestra una alerta si algún campo está vacío
-            alert('Por favor, completa todos los campos de la tarea.');
+            alert("Por favor, completa todos los campos de la tarea.");// Muestra una alerta si algún campo está vacío
         }
     }
 
-    // Asigna la función agregarEvento al botón de agregar evento
-    document.getElementById('btnAgregarEvento').addEventListener('click', agregarEvento);
-    // Asigna la función agregarTarea al botón de agregar tarea
-    document.getElementById('btnAgregarTarea').addEventListener('click', agregarTarea);
+    
+    document.getElementById('btnAgregarTarea').addEventListener('click', agregarTarea); // Asigna la función agregarTarea al botón de agregar tarea
 });
 
 
