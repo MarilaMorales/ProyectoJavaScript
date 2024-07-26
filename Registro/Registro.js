@@ -1,5 +1,4 @@
 
-
 document.getElementById("registroUsuarios").onsubmit = function (event) {
     event.preventDefault();
     registrarUsuario();

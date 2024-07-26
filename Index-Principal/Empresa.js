@@ -1,7 +1,6 @@
   
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // document.getElementById('btnAgregarEvento').addEventListener('click', agregarEvento); // Asigna la función agregarEvento al botón de agregar evento
+document.getElementById('btnAgregarEvento').addEventListener('click', agregarEvento); // Asigna la función agregarEvento al botón de agregar evento
     
 
     function agregarEvento() { // Función para agregar un evento
@@ -16,17 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
             let eventoDiv = document.createElement("div");
             eventoDiv.className = "evento";  // Crea un nuevo elemento div para el evento y le crea una clase llamada evento
             eventoDiv.textContent = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput; // IMPORTANTE aqui  le da el nuevo contenido al Div hijo
-            
-                // Crear botón de editar.
-            let btnEditar = document.createElement('button');
-            btnEditar.textContent = 'Editar';
-            
-            btnEditar.addEventListener('click', function() {
-                editarTarea(tareaTexto.textContent);
-            });
-
-            
-            
             
             contenedorEventos.appendChild(eventoDiv); //Añada el Div hijo al Div Padre.
 
