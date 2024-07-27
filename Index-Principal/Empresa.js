@@ -7,37 +7,54 @@ document.addEventListener("DOMContentLoaded", function() {
     cargarEventos();
     cargarTareas();
 
-    // Evento para agregar un nuevo evento
-    document.getElementById('btnAgregarEvento').addEventListener('click', function() {
+   
+    document.getElementById('btnAgregarEvento').addEventListener('click', function() {  // 
         // Obtener los valores de los campos de entrada
         let eventoInput = document.getElementById("evento").value;
         let fechaEventoInput = document.getElementById("fechaEvento").value;
 
         // Verificar que ambos campos no estén vacíos
         if (eventoInput !== "" && fechaEventoInput !== "") {
-            // Crear un nuevo div para el evento
-            let eventoDiv = document.createElement("div");
+           
+            let eventoDiv = document.createElement("div"); // Crear un nuevo div hijo para poner los datos
             eventoDiv.className = "evento";
-            eventoDiv.textContent = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
+
+            eventoDiv.innerHTML = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
             
+            
+            let btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "Eliminar";
+
+            btnEliminar.addEventListener('click', function() {
+                eliminarEvento(eventoInput, fechaEventoInput, eventoDiv);
+            });
+
+
+            let btnEditar = document.createElement("button");
+            btnEditar.textContent = "Editar";
+
+            btnEditar.addEventListener('click', function() {
+                editarEvento(eventoInput, fechaEventoInput, eventoDiv);
+            });
+
+
+            eventoDiv.appendChild(btnEliminar);
+            eventoDiv.appendChild(btnEditar);
             contenedorEventos.appendChild(eventoDiv);
-
-
-
-            
-
 
 
             // Guardar el evento en localStorage
             guardarEvento(eventoInput, fechaEventoInput);
 
-            // Limpiar los campos de entrada
-            document.getElementById("evento").value = "";
-            document.getElementById("fechaEvento").value = "";
+           
+
+            agregarEventosBotones();
+
         } else {
             alert("Por favor, completa todos los campos del evento.");
         }
     });
+
 
     // Función para guardar un evento en localStorage
     function guardarEvento(evento, fecha) {
@@ -53,13 +70,74 @@ document.addEventListener("DOMContentLoaded", function() {
     function cargarEventos() {
         let eventos = JSON.parse(localStorage.getItem('eventos'));
         if (eventos !== null) {
-            for (var i = 0; i < eventos.length; i++) {
-                var evento = eventos[i];
-                var eventoDiv = document.createElement("div");
+            for (let i = 0; i < eventos.length; i++) {
+                let evento = eventos[i];
+                let eventoDiv = document.createElement("div");
                 eventoDiv.className = "evento";
                 eventoDiv.textContent = "Evento: " + evento.evento + " - Fecha: " + evento.fecha;
+
+                // Crear botones de editar y eliminar
+                var btnEliminar = document.createElement("button");
+                btnEliminar.textContent = "Eliminar";
+                btnEliminar.addEventListener('click', function() {
+                    eliminarEvento(evento.evento, evento.fecha, eventoDiv);
+                });
+
+                var btnEditar = document.createElement("button");
+                btnEditar.textContent = "Editar";
+                btnEditar.addEventListener('click', function() {
+                    editarEvento(evento.evento, evento.fecha, eventoDiv);
+                });
+
+
+
                 contenedorEventos.appendChild(eventoDiv);
+                eventoDiv.appendChild(btnEliminar);
+                eventoDiv.appendChild(btnEditar);
             }
+        }
+    }
+    
+     // Función para eliminar un evento
+    function eliminarEvento(evento, fecha, eventoDiv) {
+        let eventos = JSON.parse(localStorage.getItem('eventos'));
+        if (eventos !== null) {
+            eventos = eventos.filter(function(e) {
+                return !(e.evento === evento && e.fecha === fecha);
+            });
+            localStorage.setItem('eventos', JSON.stringify(eventos));
+            contenedorEventos.removeChild(eventoDiv);
+        }
+    }
+
+     // Función para editar un evento
+     function editarEvento(evento, fecha, eventoDiv) {
+        let nuevoEvento = prompt("Edita el evento:", evento);
+        let nuevaFecha = prompt("Edita la fecha del evento:", fecha);
+
+        if (nuevoEvento !== null && nuevaFecha !== null) {
+            // Actualizar el evento en localStorage
+            eliminarEvento(evento, fecha, eventoDiv);
+            guardarEvento(nuevoEvento, nuevaFecha);
+
+            // Actualizar el div
+            eventoDiv.textContent = "Evento: " + nuevoEvento + " - Fecha: " + nuevaFecha;
+
+            // Añadir botones nuevamente
+            let btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "Eliminar";
+            btnEliminar.addEventListener('click', function() {
+                eliminarEvento(nuevoEvento, nuevaFecha, eventoDiv);
+            });
+
+            let btnEditar = document.createElement("button");
+            btnEditar.textContent = "Editar";
+            btnEditar.addEventListener('click', function() {
+                editarEvento(nuevoEvento, nuevaFecha, eventoDiv);
+            });
+
+            eventoDiv.appendChild(btnEliminar);
+            eventoDiv.appendChild(btnEditar);
         }
     }
 
@@ -90,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Limpiar los campos de entrada
             document.getElementById("tarea").value = "";
-            for (var i = 0; i < prioridadesSeleccionadas.options.length; i++) {
+            for (let i = 0; i < prioridadesSeleccionadas.options.length; i++) {
                 prioridadesSeleccionadas.options[i].selected = false;
             }
         } else {
@@ -100,19 +178,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Función para guardar una tarea en localStorage
     function guardarTarea(tarea, prioridades) {
-        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        let tareas = JSON.parse(localStorage.getItem("tareas"));
         if (tareas === null) {
             tareas = [];
         }
         tareas.push({ tarea: tarea, prioridades: prioridades });
-        localStorage.setItem('tareas', JSON.stringify(tareas));
+        localStorage.setItem("tareas", JSON.stringify(tareas));
     }
 
     // Función para cargar tareas desde localStorage
     function cargarTareas() {
-        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        let tareas = JSON.parse(localStorage.getItem("tareas"));
         if (tareas !== null) {
-            for (var i = 0; i < tareas.length; i++) {
+            for (let i = 0; i < tareas.length; i++) {
                 let tarea = tareas[i];
                 let tareaElemento = document.createElement("div");
                 tareaElemento.className = "tarea";
