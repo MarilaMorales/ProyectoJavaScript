@@ -1,65 +1,127 @@
-  
 document.addEventListener("DOMContentLoaded", function() {
-document.getElementById('btnAgregarEvento').addEventListener('click', agregarEvento); // Asigna la función agregarEvento al botón de agregar evento
-    
+    // Obtener referencias a los elementos del DOM
+    let contenedorEventos = document.getElementById("contenedorEventos");
+    let contenedorTareas = document.getElementById("contenedorTareas");
 
-    function agregarEvento() { // Función para agregar un evento
-       
-        let eventoInput = document.getElementById("evento").value; // Se obtiene el valor de evento y fecha
+    // Cargar eventos y tareas desde localStorage
+    cargarEventos();
+    cargarTareas();
+
+    // Evento para agregar un nuevo evento
+    document.getElementById('btnAgregarEvento').addEventListener('click', function() {
+        // Obtener los valores de los campos de entrada
+        let eventoInput = document.getElementById("evento").value;
         let fechaEventoInput = document.getElementById("fechaEvento").value;
-        let contenedorEventos = document.getElementById("contenedorEventos"); // Div padre donde se mostraran 
 
-        
-        if (eventoInput && fechaEventoInput) { // Verifica que ambos campos tengan valores
-            
+        // Verificar que ambos campos no estén vacíos
+        if (eventoInput !== "" && fechaEventoInput !== "") {
+            // Crear un nuevo div para el evento
             let eventoDiv = document.createElement("div");
-            eventoDiv.className = "evento";  // Crea un nuevo elemento div para el evento y le crea una clase llamada evento
-            eventoDiv.textContent = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput; // IMPORTANTE aqui  le da el nuevo contenido al Div hijo
+            eventoDiv.className = "evento";
+            eventoDiv.textContent = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
             
-            contenedorEventos.appendChild(eventoDiv); //Añada el Div hijo al Div Padre.
+            contenedorEventos.appendChild(eventoDiv);
 
-            console.log(eventoInput, fechaEventoInput);
 
-            // Limpia los campos de entrada
+
+            
+
+
+
+            // Guardar el evento en localStorage
+            guardarEvento(eventoInput, fechaEventoInput);
+
+            // Limpiar los campos de entrada
             document.getElementById("evento").value = "";
             document.getElementById("fechaEvento").value = "";
-            console.log(evento, fechaEvento);
         } else {
-            // Muestra una alerta si algún campo está vacío
             alert("Por favor, completa todos los campos del evento.");
         }
+    });
+
+    // Función para guardar un evento en localStorage
+    function guardarEvento(evento, fecha) {
+        let eventos = JSON.parse(localStorage.getItem('eventos'));
+        if (eventos === null) {
+            eventos = [];
+        }
+        eventos.push({ evento: evento, fecha: fecha });
+        localStorage.setItem('eventos', JSON.stringify(eventos));
     }
 
-    // Función para agregar una tarea
-    function agregarTarea() {
-        
-        let tareaInput = document.getElementById("tarea").value;// Obtiene el valor del input de tarea
-        let prioridadesSeleccionadas = Array.from(document.getElementById("prioridadTarea").selectedOptions).map(function(option) {   // Obtiene las opciones seleccionadas del select de prioridades
-            return option.value;
-        });
-        
-        let contenedorTareas = document.getElementById("contenedorTareas");// Obtiene el contenedor donde se mostrarán las tareas.
-
-        // Verifica que la tarea tenga un valor y que al menos una prioridad esté seleccionada.
-        if (tareaInput && prioridadesSeleccionadas.length > 0) {
-            
-            let tareaElemento = document.createElement("div"); // Crea un nuevo elemento div hijo para la tarea.
-            tareaElemento.className = "tarea"; //Se le asigna una clase.
-            tareaElemento.textContent = "Tarea: " + tareaInput + " - Prioridades: " + prioridadesSeleccionadas.join(', '); //Le da al nuevo Div los valores de las prioridades.
-            contenedorTareas.appendChild(tareaElemento);
-
-            
-            document.getElementById("tarea").value = ""; // Limpia el campo de entrada y se quitan las opciones de las prioridades.
-            document.getElementById("prioridadTarea").selectedIndex = -1;
-        } else {
-            alert("Por favor, completa todos los campos de la tarea.");// Muestra una alerta si algún campo está vacío
+    // Función para cargar eventos desde localStorage
+    function cargarEventos() {
+        let eventos = JSON.parse(localStorage.getItem('eventos'));
+        if (eventos !== null) {
+            for (var i = 0; i < eventos.length; i++) {
+                var evento = eventos[i];
+                var eventoDiv = document.createElement("div");
+                eventoDiv.className = "evento";
+                eventoDiv.textContent = "Evento: " + evento.evento + " - Fecha: " + evento.fecha;
+                contenedorEventos.appendChild(eventoDiv);
+            }
         }
     }
 
-    
-    document.getElementById('btnAgregarTarea').addEventListener('click', agregarTarea); // Asigna la función agregarTarea al botón de agregar tarea
-});
+    // Evento para agregar una nueva tarea
+    document.getElementById('btnAgregarTarea').addEventListener('click', function() {
+        // Obtener los valores de los campos de entrada
+        let tareaInput = document.getElementById("tarea").value;
+        let prioridadesSeleccionadas = document.getElementById("prioridadTarea");
+        let prioridades = [];
 
+        // Obtener las prioridades seleccionadas
+        for (let i = 0; i < prioridadesSeleccionadas.options.length; i++) {
+            if (prioridadesSeleccionadas.options[i].selected) {
+                prioridades.push(prioridadesSeleccionadas.options[i].value);
+            }
+        }
+
+        // Verificar que la tarea no esté vacía y que al menos una prioridad esté seleccionada
+        if (tareaInput !== "" && prioridades.length > 0) {
+            // Crear un nuevo div para la tarea
+            let tareaElemento = document.createElement("div");
+            tareaElemento.className = "tarea";
+            tareaElemento.textContent = "Tarea: " + tareaInput + " - Prioridades: " + prioridades.join(', ');
+            contenedorTareas.appendChild(tareaElemento);
+
+            // Guardar la tarea en localStorage
+            guardarTarea(tareaInput, prioridades);
+
+            // Limpiar los campos de entrada
+            document.getElementById("tarea").value = "";
+            for (var i = 0; i < prioridadesSeleccionadas.options.length; i++) {
+                prioridadesSeleccionadas.options[i].selected = false;
+            }
+        } else {
+            alert("Por favor, completa todos los campos de la tarea.");
+        }
+    });
+
+    // Función para guardar una tarea en localStorage
+    function guardarTarea(tarea, prioridades) {
+        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        if (tareas === null) {
+            tareas = [];
+        }
+        tareas.push({ tarea: tarea, prioridades: prioridades });
+        localStorage.setItem('tareas', JSON.stringify(tareas));
+    }
+
+    // Función para cargar tareas desde localStorage
+    function cargarTareas() {
+        let tareas = JSON.parse(localStorage.getItem('tareas'));
+        if (tareas !== null) {
+            for (var i = 0; i < tareas.length; i++) {
+                let tarea = tareas[i];
+                let tareaElemento = document.createElement("div");
+                tareaElemento.className = "tarea";
+                tareaElemento.textContent = "Tarea: " + tarea.tarea + " - Prioridades: " + tarea.prioridades.join(', ');
+                contenedorTareas.appendChild(tareaElemento);
+            }
+        }
+    }
+});
 
 
 
