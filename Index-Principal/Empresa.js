@@ -1,104 +1,104 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtener referencias a los elementos del DOM
-    let contenedorEventos = document.getElementById("contenedorEventos");
-    let contenedorTareas = document.getElementById("contenedorTareas");
+// Obtener referencias a los elementos del DOM
+let contenedorEventos = document.getElementById("contenedorEventos");
+let contenedorTareas = document.getElementById("contenedorTareas");
 
-    // Cargar eventos y tareas desde localStorage
-    cargarEventos();
-    cargarTareas();
+// Cargar eventos y tareas desde localStorage cuando se carga la página
+cargarEventos();
+cargarTareas();
 
-   
-    document.getElementById('btnAgregarEvento').addEventListener('click', function() {  // 
-        // Obtener los valores de los campos de entrada
-        let eventoInput = document.getElementById("evento").value;
-        let fechaEventoInput = document.getElementById("fechaEvento").value;
+// Evento para agregar un nuevo evento
+document.getElementById('btnAgregarEvento').addEventListener('click', function() {
+    // Obtener los valores de los campos de entrada
+    let eventoInput = document.getElementById("evento").value;
+    let fechaEventoInput = document.getElementById("fechaEvento").value;
 
-        // Verificar que ambos campos no estén vacíos
-        if (eventoInput !== "" && fechaEventoInput !== "") {
-           
-            let eventoDiv = document.createElement("div"); // Crear un nuevo div hijo para poner los datos
-            eventoDiv.className = "evento";
-            eventoDiv.innerHTML = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
-            
-            
-            let btnEliminar = document.createElement("button");
-            btnEliminar.textContent = "Eliminar";
-            btnEliminar.addEventListener('click', function() {
-                eliminarEvento(eventoInput, fechaEventoInput, eventoDiv);
-            });
+    // Verificar que ambos campos no estén vacíos
+    if (eventoInput !== "" && fechaEventoInput !== "") {
+        // Crear un nuevo div para el evento
+        let eventoDiv = document.createElement("div");
+        eventoDiv.className = "evento";
+        eventoDiv.innerHTML = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
 
+        // Crear el botón de eliminar para el evento
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.addEventListener('click', function() {
+            eliminarEvento(eventoInput, fechaEventoInput, eventoDiv);
+        });
 
-            let btnEditar = document.createElement("button");
-            btnEditar.textContent = "Editar";
-            btnEditar.addEventListener('click', function() {
-                editarEvento(eventoInput, fechaEventoInput, eventoDiv);
-            });
+        // Crear el botón de editar para el evento
+        let btnEditar = document.createElement("button");
+        btnEditar.textContent = "Editar";
+        btnEditar.addEventListener('click', function() {
+            editarEvento(eventoInput, fechaEventoInput, eventoDiv);
+        });
 
+        // Agregar los botones al div del evento
+        eventoDiv.appendChild(btnEliminar);
+        eventoDiv.appendChild(btnEditar);
 
-            eventoDiv.appendChild(btnEliminar);
-            eventoDiv.appendChild(btnEditar);
-            contenedorEventos.appendChild(eventoDiv);
+        // Agregar el div del evento al contenedor de eventos
+        contenedorEventos.appendChild(eventoDiv);
 
+        // Guardar el evento en localStorage
+        guardarEvento(eventoInput, fechaEventoInput);
 
-            // Guardar el evento en localStorage
-            guardarEvento(eventoInput, fechaEventoInput);
-
-            document.getElementById("evento").value = "";
-            document.getElementById("fechaEvento").value = "";
-
-            // agregarEventosBotones();    OJOJOJOJOJOJOJ            OJOJOKOKOKOKO
-
-        } else {
-            alert("Por favor, completa todos los campos del evento.");
-        }
+        // Limpiar los campos de entrada
+        document.getElementById("evento").value = "";
+        document.getElementById("fechaEvento").value = "";
+    } else {
+        // Mostrar alerta si algún campo está vacío
+        alert("Por favor, completa todos los campos del evento.");
+    }
 });
 
-
-    // Función para guardar un evento en localStorage
+// Función para guardar un evento en localStorage
 function guardarEvento(evento, fecha) {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
     if (eventos === null) {
         eventos = [];
     }
     eventos.push({ evento: evento, fecha: fecha });
-
     localStorage.setItem('eventos', JSON.stringify(eventos));
-
 }
 
-    // Función para cargar eventos desde localStorage
+// Función para cargar eventos desde localStorage
 function cargarEventos() {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
     if (eventos !== null) {
         for (let i = 0; i < eventos.length; i++) {
             let evento = eventos[i];
+
+            // Crear un nuevo div para el evento
             let eventoDiv = document.createElement("div");
             eventoDiv.className = "evento";
             eventoDiv.textContent = "Evento: " + evento.evento + " - Fecha: " + evento.fecha;
 
-            // Crear botones de editar y eliminar
+            // Crear el botón de eliminar para el evento
             let btnEliminarEvento = document.createElement("button");
             btnEliminarEvento.textContent = "Eliminar";
             btnEliminarEvento.addEventListener('click', function() {
                 eliminarEvento(evento.evento, evento.fecha, eventoDiv);
             });
 
+            // Crear el botón de editar para el evento
             let btnEditarEvento = document.createElement("button");
             btnEditarEvento.textContent = "Editar";
             btnEditarEvento.addEventListener('click', function() {
                 editarEvento(evento.evento, evento.fecha, eventoDiv);
             });
 
-
-
-            contenedorEventos.appendChild(eventoDiv);
+            // Agregar los botones al div del evento
             eventoDiv.appendChild(btnEliminarEvento);
             eventoDiv.appendChild(btnEditarEvento);
+
+            // Agregar el div del evento al contenedor de eventos
+            contenedorEventos.appendChild(eventoDiv);
         }
     }
 }
 
-    // Función para eliminar un evento
+// Función para eliminar un evento
 function eliminarEvento(evento, fecha, eventoDiv) {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
     if (eventos !== null) {
@@ -110,16 +110,16 @@ function eliminarEvento(evento, fecha, eventoDiv) {
     }
 }
 
-    // Función para editar un evento
+// Función para editar un evento
 function editarEvento(evento, fecha, eventoDiv) {
     let nuevoEvento = prompt("Edita el evento:", evento);
     let nuevaFecha = prompt("Edita la fecha del evento:", fecha);
 
     if (nuevoEvento !== null && nuevaFecha !== null) {
-        // Eliminar el evento antiguio
+        // Eliminar el evento antiguo
         eliminarEvento(evento, fecha, eventoDiv);
-        
-        // Guardar el nuevo Evento
+
+        // Guardar el evento editado
         guardarEvento(nuevoEvento, nuevaFecha);
 
         // Crear un nuevo div para el evento actualizado
@@ -127,21 +127,22 @@ function editarEvento(evento, fecha, eventoDiv) {
         nuevoEventoDiv.className = "evento";
         nuevoEventoDiv.textContent = "Evento: " + nuevoEvento + " - Fecha: " + nuevaFecha;
 
-        // Añadir botones nuevamente
+        // Crear nuevamente los botones para el evento editado
         let btnEliminarEvento = document.createElement("button");
         btnEliminarEvento.textContent = "Eliminar";
         btnEliminarEvento.addEventListener('click', function() {
-            eliminarEvento(nuevoEvento, nuevaFecha, eventoDiv);
+            eliminarEvento(nuevoEvento, nuevaFecha, nuevoEventoDiv);
         });
 
         let btnEditarEvento = document.createElement("button");
         btnEditarEvento.textContent = "Editar";
         btnEditarEvento.addEventListener('click', function() {
-            editarEvento(nuevoEvento, nuevaFecha, eventoDiv);
+            editarEvento(nuevoEvento, nuevaFecha, nuevoEventoDiv);
         });
 
-        eventoDiv.appendChild(btnEliminarEvento);
-        eventoDiv.appendChild(btnEditarEvento);
+        // Agregar los botones al div del evento
+        nuevoEventoDiv.appendChild(btnEliminarEvento);
+        nuevoEventoDiv.appendChild(btnEditarEvento);
 
         // Agregar el div del evento actualizado al contenedor de eventos
         contenedorEventos.appendChild(nuevoEventoDiv);
@@ -168,23 +169,24 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         let tareaElemento = document.createElement("div");
         tareaElemento.className = "tarea";
         tareaElemento.textContent = "Tarea: " + tareaInput + " - Prioridades: " + prioridades.join(', ');
-    
-        // Crear botones de editar y eliminar
+
+        // Crear el botón de eliminar para la tarea
         let btnEliminarTarea = document.createElement("button");
         btnEliminarTarea.textContent = "Eliminar";
         btnEliminarTarea.addEventListener('click', function() {
             eliminarTarea(tareaInput, prioridades, tareaElemento);
         });
-        
+
+        // Crear el botón de editar para la tarea
         let btnEditarTarea = document.createElement("button");
         btnEditarTarea.textContent = "Editar";
         btnEditarTarea.addEventListener('click', function() {
             editarTarea(tareaInput, prioridades, tareaElemento);
         });
-        
+
         // Agregar los botones al div de la tarea
-        tareaElemento.appendChild(btnEliminarTarea)
-        tareaElemento.appendChild(btnEditarTarea)
+        tareaElemento.appendChild(btnEliminarTarea);
+        tareaElemento.appendChild(btnEditarTarea);
 
         // Agregar el div de la tarea al contenedor de tareas
         contenedorTareas.appendChild(tareaElemento);
@@ -198,6 +200,7 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
             prioridadesSeleccionadas.options[i].selected = false;
         }
     } else {
+        // Mostrar alerta si algún campo está vacío
         alert("Por favor, completa todos los campos de la tarea.");
     }
 });
@@ -218,13 +221,12 @@ function cargarTareas() {
     if (tareas !== null) {
         for (let i = 0; i < tareas.length; i++) {
             let tarea = tareas[i];
-            
 
-            // Crear un nuevo Div para la Tarea
+            // Crear un nuevo div para la tarea
             let tareaElemento = document.createElement("div");
             tareaElemento.className = "tarea";
             tareaElemento.textContent = "Tarea: " + tarea.tarea + " - Prioridades: " + tarea.prioridades.join(', ');
-            
+
             // Crear el botón de eliminar para la tarea
             let btnEliminarTarea = document.createElement("button");
             btnEliminarTarea.textContent = "Eliminar";
@@ -232,20 +234,23 @@ function cargarTareas() {
                 eliminarTarea(tarea.tarea, tarea.prioridades, tareaElemento);
             });
 
+            // Crear el botón de editar para la tarea
             let btnEditarTarea = document.createElement("button");
             btnEditarTarea.textContent = "Editar";
             btnEditarTarea.addEventListener('click', function() {
                 editarTarea(tarea.tarea, tarea.prioridades, tareaElemento);
             });
 
+            // Agregar los botones al div de la tarea
             tareaElemento.appendChild(btnEliminarTarea);
-            tareaElemento.appendChild(btnEditarTarea);                
+            tareaElemento.appendChild(btnEditarTarea);
+
+            // Agregar el div de la tarea al contenedor de tareas
             contenedorTareas.appendChild(tareaElemento);
-
-
         }
     }
 }
+
 // Función para eliminar una tarea
 function eliminarTarea(tarea, prioridades, tareaElemento) {
     let tareas = JSON.parse(localStorage.getItem('tareas'));
@@ -258,8 +263,7 @@ function eliminarTarea(tarea, prioridades, tareaElemento) {
     }
 }
 
-
-    // Función para editar una tarea
+// Función para editar una tarea
 function editarTarea(tarea, prioridades, tareaElemento) {
     // Solicitar al usuario los nuevos valores para la tarea
     let nuevaTarea = prompt("Edita la tarea:", tarea);
@@ -268,35 +272,35 @@ function editarTarea(tarea, prioridades, tareaElemento) {
     if (nuevaTarea !== null && nuevasPrioridades !== null) {
         nuevasPrioridades = nuevasPrioridades.split(',').map(p => p.trim());
 
-    // Eliminar la tarea antigua
-    eliminarTarea(tarea, prioridades, tareaElemento);
+        // Eliminar la tarea antigua
+        eliminarTarea(tarea, prioridades, tareaElemento);
 
-    // Guardar la tarea editada
-    guardarTarea(nuevaTarea, nuevasPrioridades);
+        // Guardar la tarea editada
+        guardarTarea(nuevaTarea, nuevasPrioridades);
 
-    // Actualizar el contenido del div de la tarea
-    tareaElemento.textContent = "Tarea: " + nuevaTarea + " - Prioridades: " + nuevasPrioridades.join(', ');
+        // Crear un nuevo div para la tarea actualizada
+        let nuevaTareaElemento = document.createElement("div");
+        nuevaTareaElemento.className = "tarea";
+        nuevaTareaElemento.textContent = "Tarea: " + nuevaTarea + " - Prioridades: " + nuevasPrioridades.join(', ');
 
-    // Crear nuevamente los botones para la tarea editada
-    let btnEliminarTarea = document.createElement("button");
-    btnEliminarTarea.textContent = "Eliminar";
-    btnEliminarTarea.addEventListener('click', function() {
-        eliminarTarea(nuevaTarea, nuevasPrioridades, tareaElemento);
-    });
+        // Crear nuevamente los botones para la tarea editada
+        let btnEliminarTarea = document.createElement("button");
+        btnEliminarTarea.textContent = "Eliminar";
+        btnEliminarTarea.addEventListener('click', function() {
+            eliminarTarea(nuevaTarea, nuevasPrioridades, nuevaTareaElemento);
+        });
 
-    let btnEditarTarea = document.createElement("button");
-    btnEditarTarea.textContent = "Editar";
-    btnEditarTarea.addEventListener('click', function() {
-        editarTarea(nuevaTarea, nuevasPrioridades, tareaElemento);
-    });
+        let btnEditarTarea = document.createElement("button");
+        btnEditarTarea.textContent = "Editar";
+        btnEditarTarea.addEventListener('click', function() {
+            editarTarea(nuevaTarea, nuevasPrioridades, nuevaTareaElemento);
+        });
 
-    // Agregar los botones al div de la tarea
-    tareaElemento.appendChild(btnEliminarTarea);
-    tareaElemento.appendChild(btnEditarTarea);
+        // Agregar los botones al div de la tarea
+        nuevaTareaElemento.appendChild(btnEliminarTarea);
+        nuevaTareaElemento.appendChild(btnEditarTarea);
+
+        // Agregar el div de la tarea actualizada al contenedor de tareas
+        contenedorTareas.appendChild(nuevaTareaElemento);
+    }
 }
-}
-
-});
-
-
-
