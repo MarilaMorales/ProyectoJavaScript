@@ -4,31 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
+    <link rel="stylesheet" href="LogIn-Style.css">
 </head>
 <body>
-    
-<div class="logIn1">
-    <div class="logInForm">
-        <h2 id="titulo3">Log In</h2>
-        <form id="loginUsuarios">
-            <div class="input2">
-                <input type="text" id="correoLog" placeholder="Escribe tu correo" required>
+    <div class="containerBody">
+        <div class="tituloOcean">
+            <img src="../IMG/logInSea.png" alt="">
+        </div>
+
+        <div class="logIn1">
+
+            <div class="logInForm">
+                <h2 id="titulo3">Log In</h2>
+                <form id="loginUsuarios">
+                    <div class="input2">
+                        <input type="text" id="correoLog" placeholder="Escribe tu correo" required>
+                    </div>
+                    <div class="input2">
+                        <input type="password" id="contrasenaLog" placeholder="Contraseña" required>
+                    </div>
+                    <div class="input2buton">
+                        <input id="btnEnviar2" type="submit" value="Iniciar sesión">
+                    </div>
+                    <div class="Register"> 
+                        <p id="bthRegister">¿No tienes una cuenta? <a id="aRegister" href="../Registro/Registro.html">Registrate</a></p>
+                    </div>
+                </form>
+                <div id="loginError" style="color: red;"></div>
             </div>
-            <div class="input2">
-                <input type="password" id="contrasenaLog" placeholder="Contraseña" required>
+            <div class="logInLogo">
+                <img id="logoOcean" src="../IMG/logLogo.png" alt="">
             </div>
-            <div class="input2buton">
-                <input id="btnEnviar2" type="submit" value="Iniciar sesión">
-            </div>
-            <div class="Register"> 
-                <p>¿No tienes una cuenta? <a href="../Registro/Registro.html">Registrate</a></p>
-            </div>
-        </form>
-        <div id="loginError" style="color: red;"></div>
+        </div>
     </div>
-</div>
-
-
 
     
     <script src="logIn.js"></script>

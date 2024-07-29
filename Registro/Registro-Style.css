@@ -16,7 +16,7 @@ body {
     height: 100vh;
     width: 100%;
     overflow: hidden; /* Previene el scroll si es necesario */
-    background-image: url("../IMG/Background.jpg");
+    background-image: url("../IMG/fondo.jpg");
 }
 
 .formulario {

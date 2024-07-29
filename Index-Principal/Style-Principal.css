@@ -1,0 +1,128 @@
+
+
+body{
+    background-color: rgb(218, 237, 230)!important;
+}
+
+
+.header {
+    height: 12rem;
+    margin-bottom: 3rem;
+    background-image: url("../Registro/IMG/fondo.jpg");
+    background-size: cover; 
+    border-bottom:white solid 2px;
+}
+
+.headerConteiner {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
+.logoHeader {
+    grid-column: 1;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tituloHeader {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    
+}
+
+.logoHeader img {
+    height: 9rem;
+    margin-top: 1rem;
+}
+
+#imageSeas{
+    margin-top: 1rem;
+}
+
+.tituloAdministracion {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tabNavegador ul li a{
+    background-color: rgba(57, 144, 112, 0.462)!important;
+    
+}
+
+
+.eventoConteiner{
+    margin-top: 2rem;
+    margin-bottom: 3rem !important ;
+}
+
+.contenedorEventos{
+    display: flex;
+    justify-content: space-around !important;
+}
+
+
+.evento{
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.evento button{
+    margin: 0.5rem !important;
+}
+
+.tarea{
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+}
+
+
+.tarea button{
+    margin: 0.5rem !important;
+}
+
+
+
+
+
+
+
+
+.footer2{
+    height: 18rem;
+    display: grid;
+    grid-template: 1fr 1fr/25% 50% 20%;
+    justify-content: space-around;
+    background-color: #184a62;
+    background-size: cover; 
+   
+}
+
+.footerTexto{
+    display: flex;
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    height: 4rem;
+    margin-top: 2rem;
+}
+
+.footerTexto2{
+    grid-column: 2;
+    font-size: 1.3rem;
+    justify-content: center;
+    color: rgb(209, 224, 222);
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btnFooter{
+    background-color: rgb(107, 211, 211);
+    width: 12rem;
+    display: flex;
+    justify-content: center;
+}
+

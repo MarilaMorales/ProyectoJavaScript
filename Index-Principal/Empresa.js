@@ -6,15 +6,19 @@ let contenedorTareas = document.getElementById("contenedorTareas");
 cargarEventos();
 cargarTareas();
 
-// Evento para agregar un nuevo evento
-document.getElementById('btnAgregarEvento').addEventListener('click', function() {
-    // Obtener los valores de los campos de entrada
-    let eventoInput = document.getElementById("evento").value;
+
+                                // Agregar un nuevo evento
+//--------------------------------------------------------------------------------------------
+
+
+document.getElementById('btnAgregarEvento').addEventListener('click', function() { //Agrega un evento al botón "Agregar Evento" para recoger los valores de entrada.
+    
+    let eventoInput = document.getElementById("evento").value;// Obtener los valores de los campos de entrada
     let fechaEventoInput = document.getElementById("fechaEvento").value;
 
     // Verificar que ambos campos no estén vacíos
     if (eventoInput !== "" && fechaEventoInput !== "") {
-        // Crear un nuevo div para el evento
+        // Crear un nuevo div para los datos 
         let eventoDiv = document.createElement("div");
         eventoDiv.className = "evento";
         eventoDiv.innerHTML = "Evento: " + eventoInput + " - Fecha: " + fechaEventoInput;
@@ -102,8 +106,8 @@ function cargarEventos() {
 function eliminarEvento(evento, fecha, eventoDiv) {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
     if (eventos !== null) {
-        eventos = eventos.filter(function(e) {
-            return !(e.evento === evento && e.fecha === fecha);
+        eventos = eventos.filter(function(eventoActual) {
+            return !(eventoActual.evento === evento && eventoActual.fecha === fecha);
         });
         localStorage.setItem('eventos', JSON.stringify(eventos));
         contenedorEventos.removeChild(eventoDiv);
@@ -267,10 +271,18 @@ function eliminarTarea(tarea, prioridades, tareaElemento) {
 function editarTarea(tarea, prioridades, tareaElemento) {
     // Solicitar al usuario los nuevos valores para la tarea
     let nuevaTarea = prompt("Edita la tarea:", tarea);
-    let nuevasPrioridades = prompt("Edita las prioridades de la tarea (separadas por coma):", prioridades.join(','));
+    let nuevasPrioridadesTemp = prompt("Edita las prioridades de la tarea (separadas por coma):", prioridades.join(','));
 
-    if (nuevaTarea !== null && nuevasPrioridades !== null) {
-        nuevasPrioridades = nuevasPrioridades.split(',').map(p => p.trim());
+        //
+    if (nuevaTarea !== null && nuevasPrioridadesTemp !== null) {
+        let nuevasPrioridades = nuevasPrioridadesTemp.split(',');
+
+        // Limpiar espacios en blanco alrededor de cada prioridad
+        for (let i = 0; i < nuevasPrioridades.length; i++) {
+            nuevasPrioridades[i] = nuevasPrioridades[i].trim();
+        }
+        
+
 
         // Eliminar la tarea antigua
         eliminarTarea(tarea, prioridades, tareaElemento);
@@ -283,7 +295,7 @@ function editarTarea(tarea, prioridades, tareaElemento) {
         nuevaTareaElemento.className = "tarea";
         nuevaTareaElemento.textContent = "Tarea: " + nuevaTarea + " - Prioridades: " + nuevasPrioridades.join(', ');
 
-        // Crear nuevamente los botones para la tarea editada
+        // Crear nuevamente los botones para la tarea editada.
         let btnEliminarTarea = document.createElement("button");
         btnEliminarTarea.textContent = "Eliminar";
         btnEliminarTarea.addEventListener('click', function() {

@@ -8,11 +8,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    
-    <h1>  Administración</h1>
 
-<div class="container mt-5">
-    <div class="tabNavegador">
+<header class="header">
+    <div class="headerConteiner">
+        <div class="logoHeader">
+            <img src="../IMG/oceanrewardsindex.png" alt="">     
+        </div>
+        <div class="tituloHeader">
+            <img src="../IMG/logoIndex2.png" alt="">
+            <img id="imageSeas" src="../IMG/logoSeas.png" alt="">
+        </div>
+    </div>
+</header>
+    <div class="tituloAdministracion">
+    <h1>  Administración</h1>
+    </div>
+
+ <div class="container mt-5"> <!--Tenemos un margen superior de 5para separar el contenido  -->
+    <div class="tabNavegador"><!-- Menu de tabs usando bootstrap para navegar entre Evento y Tareas -->
         <ul class="nav nav-tabs" id="nav-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="nav-Eventos-tab" data-toggle="tab" href="#nav-Eventos" role="tab" aria-controls="nav-Eventos" aria-selected="true">Eventos</a>
@@ -36,12 +49,12 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-Tareas" role="tabpanel" aria-labelledby="nav-Tareas-tab">
-                <div class="tareasConteiner">
+                <div class="tareasConteiner"> <!-- TAREAS -->
                     <h2>Tareas</h2>
                     <div class="tareasConteiner2">
                         <div class="containerTareas">
                             <input id="tarea" type="text" placeholder="Agregar Tarea" required>
-                            <select id="prioridadTarea" multiple>
+                            <select id="prioridadTarea" multiple size="1">
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
@@ -56,11 +69,30 @@
     </div>
 </div>
 
-<script src="Empresa.js"></script>
+<footer class="footer">
+
+    <div class="footer2">
+        <div class="footerTexto">
+            <img src="../IMG/tituloFooter.png" alt="">
+        </div>
+        <div class="footerTexto2">
+        <p>OceanRewards and CurrentSeas are projects that make a real impact. By joining us, you 
+            become part of a movement to protect our oceans through fun and rewarding activities.</p>
+            <div class="btnFooter">
+                <a href="https://oceanrewards.org/#" class="button">Start your Journey</a>
+    
+            </div>
+        </div>
+     
+    </div>
+
+
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="Empresa.js"></script>
 </body>
 </html>
 
