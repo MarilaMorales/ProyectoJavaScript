@@ -56,6 +56,12 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
     }
 });
 
+
+
+// -------------------------------- Guardar un Evento en LocalStorage-------------------
+
+
+
 // Función para guardar un evento en localStorage
 function guardarEvento(evento, fecha) {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
@@ -66,7 +72,14 @@ function guardarEvento(evento, fecha) {
     localStorage.setItem('eventos', JSON.stringify(eventos));
 }
 
+
+
+
+// -----------------------------Cargar Eventos desde LocalStorage------------------------
+
 // Función para cargar eventos desde localStorage
+
+
 function cargarEventos() {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
     if (eventos !== null) {
@@ -102,6 +115,10 @@ function cargarEventos() {
     }
 }
 
+
+//------------------------------- Funcion para Eliminar Evento-----------------------------
+
+
 // Función para eliminar un evento
 function eliminarEvento(evento, fecha, eventoDiv) {
     let eventos = JSON.parse(localStorage.getItem('eventos'));
@@ -113,6 +130,11 @@ function eliminarEvento(evento, fecha, eventoDiv) {
         contenedorEventos.removeChild(eventoDiv);
     }
 }
+
+
+
+//---------------------------------- Editar un Evento--------------------------------------
+
 
 // Función para editar un evento
 function editarEvento(evento, fecha, eventoDiv) {
@@ -153,12 +175,19 @@ function editarEvento(evento, fecha, eventoDiv) {
     }
 }
 
-// Evento para agregar una nueva tarea
+
+
+//------------------------------------ Funcion de Agregar Tareas-------------------------------------------
+
+
+// Funcion para agregar una nueva tarea
 document.getElementById('btnAgregarTarea').addEventListener('click', function() {
     // Obtener los valores de los campos de entrada
     let tareaInput = document.getElementById("tarea").value;
     let prioridadesSeleccionadas = document.getElementById("prioridadTarea");
     let prioridades = [];
+
+
 
     // Obtener las prioridades seleccionadas
     for (let i = 0; i < prioridadesSeleccionadas.options.length; i++) {
@@ -167,8 +196,13 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         }
     }
 
+
+
+
     // Verificar que la tarea no esté vacía y que al menos una prioridad esté seleccionada
     if (tareaInput !== "" && prioridades.length > 0) {
+
+        //
         // Crear un nuevo div para la tarea
         let tareaElemento = document.createElement("div");
         tareaElemento.className = "tarea";
