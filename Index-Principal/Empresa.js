@@ -18,6 +18,25 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
 
     // Verificar que ambos campos no estén vacíos
     if (eventoInput !== "" && fechaEventoInput !== "") {
+
+        // Se cargan los eventos desde el Local para validarlas
+        let eventosGuardados= JSON.parse(localStorage.getItem("eventos"));
+
+        if (eventosGuardados === null) {
+            eventosGuardados = [];
+        }
+
+        // Validar si el evento ya está registrado
+        let eventoExiste = false;
+        for (let  i= 0; i < eventosGuardados.length; i++) {
+            if (eventosGuardados[i].evento === eventoInput) {
+                eventoExiste = true;
+                alert("Ya hay un evento con ese nombre");
+                return;
+            }
+        }
+
+
         // Crear un nuevo div para los datos 
         let eventoDiv = document.createElement("div");
         eventoDiv.className = "evento";
@@ -89,7 +108,7 @@ function cargarEventos() {
             // Crear un nuevo div para el evento
             let eventoDiv = document.createElement("div");
             eventoDiv.className = "evento";
-            eventoDiv.textContent = "Evento: " + evento.evento + " - Fecha: " + evento.fecha;
+            eventoDiv.textContent = "Evento: " + evento.evento + " " + " // Fecha: " + evento.fecha + " ";
 
             // Crear el botón de eliminar para el evento
             let btnEliminarEvento = document.createElement("button");
@@ -184,15 +203,15 @@ function editarEvento(evento, fecha, eventoDiv) {
 document.getElementById('btnAgregarTarea').addEventListener('click', function() {
     // Obtener los valores de los campos de entrada
     let tareaInput = document.getElementById("tarea").value;
-    let prioridadesSeleccionadas = document.getElementById("prioridadTarea");
+    let prioridadesSelect = document.getElementById("prioridadTarea");
     let prioridades = [];
 
 
 
-    // Obtener las prioridades seleccionadas
-    for (let i = 0; i < prioridadesSeleccionadas.options.length; i++) {
-        if (prioridadesSeleccionadas.options[i].selected) {
-            prioridades.push(prioridadesSeleccionadas.options[i].value);
+    // Obtener las prioridades seleccionadas, este buble, recorre todas las opciones y guarda la seleccioda en Prioridades
+    for (let i = 0; i < prioridadesSelect.options.length; i++) {
+        if (prioridadesSelect.options[i].selected) {
+            prioridades.push(prioridadesSelect.options[i].value);
         }
     }
 
@@ -202,7 +221,21 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
     // Verificar que la tarea no esté vacía y que al menos una prioridad esté seleccionada
     if (tareaInput !== "" && prioridades.length > 0) {
 
-        //
+        
+        // Se cargan las tareas desde el Local para validarlas
+        let tareasGuardadas= JSON.parse(localStorage.getItem("tareas"));
+  
+        // Validar si la tarea ya está registrada
+        let tareaExistente = false;
+        for (let  i= 0; i < tareasGuardadas.length; index++) {
+            if (tareasGuardadas[i].tarea === tareaInput) {
+                tareaExistente = true;
+                alert("La tarea ya está registrada");
+                return;
+            }
+        }
+
+
         // Crear un nuevo div para la tarea
         let tareaElemento = document.createElement("div");
         tareaElemento.className = "tarea";
@@ -234,8 +267,8 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
 
         // Limpiar los campos de entrada
         document.getElementById("tarea").value = "";
-        for (let i = 0; i < prioridadesSeleccionadas.options.length; i++) {
-            prioridadesSeleccionadas.options[i].selected = false;
+        for (let i = 0; i < prioridadesSelect.options.length; i++) {
+            prioridadesSelect.options[i].selected = false;
         }
     } else {
         // Mostrar alerta si algún campo está vacío
@@ -288,6 +321,7 @@ function cargarTareas() {
         }
     }
 }
+
 
 // Función para eliminar una tarea
 function eliminarTarea(tarea, prioridades, tareaElemento) {

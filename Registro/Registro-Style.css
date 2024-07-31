@@ -15,7 +15,7 @@ body {
     align-items: center;
     height: 100vh;
     width: 100%;
-    overflow: hidden; /* Previene el scroll si es necesario */
+    
     background-image: url("../IMG/fondo.jpg");
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 input {
-    width: 100%; /* Ajusta para que los inputs se ajusten al contenedor */
+    width: 100%; 
     padding: 1rem;
     margin: 5px 0;
     border-radius: 0.6rem;
@@ -93,7 +93,29 @@ input {
     display: flex;
     justify-content: center;
     margin-top: 1.2rem;
-    object-fit: fill;
-    height: 9rem;
+    object-fit:contain;
+    height: 7rem;
     
+}
+
+@media (max-width:500px){
+    body{
+        display: flex;
+        flex-direction: column;
+    
+    }
+    .formulario{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    
+    }
+
+    .logoRegistro img{
+        object-fit:contain;
+        margin-bottom: 1rem;
+    }
+
+
+
 }

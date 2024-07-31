@@ -64,31 +64,47 @@ body{
     justify-content: space-around !important;
 }
 
+.containerEvento{
+    margin-bottom: 3rem;
+}
 
+.contenedorEventos button{
+    border-radius: 0.6rem;
+
+}
 .evento{
     margin-top: 1.5rem;
     margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-family: sans-serif;
 }
 
 .evento button{
-    margin: 0.5rem !important;
+    
+    border-radius: 0.6rem;
+    margin-left: 1rem !important;
+    font-size: 1rem;
+    
+
 }
 
 .tarea{
-    margin-top: 3rem;
-    margin-bottom: 6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-family: sans-serif;
 }
 
 
 .tarea button{
     margin: 0.5rem !important;
+    border-radius: 0.6rem;
 }
 
-
-
-
-
-
+#h2Titulo{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
 
 
 .footer2{
@@ -98,6 +114,7 @@ body{
     justify-content: space-around;
     background-color: #184a62;
     background-size: cover; 
+    margin-top: 8rem;
    
 }
 
@@ -124,5 +141,85 @@ body{
     width: 12rem;
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
+
+@media (max-width:500px){
+
+    .headerConteiner {
+        display: grid;
+        grid-template-columns: 25% 75%;
+    }
+    
+    .logoHeader {
+        grid-column: 1;
+        object-fit: contain;
+        margin-right: 4rem;
+       
+    }
+    
+    
+    .logoHeader img {
+        grid-column: 1;
+        width: 9rem;
+    }
+    
+    .tituloHeader {
+        grid-column: 2;
+      object-fit: contain;
+    }
+
+    .tituloHeader img{
+        width: 18rem;
+        align-items: end;
+    }
+
+    .containerEvento{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.5rem;
+
+      }
+    .containerEvento input{
+        margin-top: 0.4rem;
+        margin-bottom: 0.3;
+      }
+
+    #btnAgregarEvento{
+        margin-top: 0.5rem;
+        border-radius: 0.6rem;
+      }
+
+    .evento{
+        display: flex;
+        flex-direction: column;
+        font-size: 1.2rem;
+        border-radius: 0.6rem;
+      }
+    .evento button{
+        width: 30%;
+        align-self: center;
+       
+      }
+
+    .footerTexto2{
+        display: flex;
+        flex-direction: column;
+        
+      }
+
+    .footer2{
+        grid-template: 1fr 1fr/10% 70% 20%;
+        height: 22rem;
+      }
+      .footerTexto{
+        display: flex;
+        justify-content: center;
+        grid-column: 2;
+        grid-row: 1;
+        height: 3rem;
+        margin-top: 2rem;
+    }
+
+}
