@@ -98,24 +98,32 @@ input {
     
 }
 
-@media (max-width:500px){
-    body{
-        display: flex;
-        flex-direction: column;
+@media (max-width:600px){
+    .body{
+        
+        display: grid;
+        grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr ;
+        height: 100vh;
+        width: 100%;
     
     }
-    .formulario{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+    .tituloRegistro{
+        grid-column: 2;
+        grid-row: 1;
+    width: 75%;
+   
     
     }
 
-    .logoRegistro img{
-        object-fit:contain;
-        margin-bottom: 1rem;
+    .registroUsuariosContenedor{
+        grid-column: 2;
+        grid-row: 2;
     }
 
+    .logoRegistro{
+        grid-column: 2;
+        grid-row: 3;
+    }
 
 
 }
