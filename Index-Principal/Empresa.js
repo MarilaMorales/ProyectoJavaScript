@@ -1,4 +1,4 @@
-// Obtener referencias a los elementos del DOM
+
 let contenedorEventos = document.getElementById("contenedorEventos");
 let contenedorTareas = document.getElementById("contenedorTareas");
 
@@ -227,7 +227,7 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
   
         // Validar si la tarea ya está registrada
         let tareaExistente = false;
-        for (let  i= 0; i < tareasGuardadas.length; index++) {
+        for (let  i= 0; i < tareasGuardadas.length; ii++) {
             if (tareasGuardadas[i].tarea === tareaInput) {
                 tareaExistente = true;
                 alert("La tarea ya está registrada");

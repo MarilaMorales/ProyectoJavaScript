@@ -34,8 +34,8 @@ body {
 
 #titulo3{
     color: rgba(12, 4, 62, 0.773);
-    margin-left: 0.4rem;
-    justify-content: center;
+    margin-left: 0.7rem;
+ 
 }
 .tituloOcean{
     display: flex;
@@ -51,8 +51,6 @@ body {
     grid-template: 25% 50% 25% / 15% 35% 35% 15%; 
     justify-content: center;
     align-items: center;
-    grid-column: 2;
-    grid-row: 2;
     padding: 0.5rem; 
     margin-top: 3rem;
     border-color: rgba(0, 255, 255, 0.783);
@@ -95,7 +93,7 @@ body {
 }
 
 input{
-    width: 100%; /* Ajusta para que los inputs se ajusten al contenedor */
+    width: 100%; 
     padding: 0.5rem;
     margin: 5px 0;
     border-radius: 0.6rem;
@@ -106,4 +104,46 @@ input{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     font-weight: normal;
+}
+
+
+@media (max-width:700px){
+
+    body{
+        overflow: scroll; 
+    }
+
+
+    .logIn1{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin-left: 10rem;
+    }
+
+    #imagenSealog{
+        width: 50%;
+    }
+
+    #logoOcean{
+        margin-right: 3rem;
+    }
+    #titulo3{
+        color: rgba(12, 4, 62, 0.773);
+        margin-left: 6.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+     
+    }
+
+    .tituloOcean{
+
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+        margin-right: 4rem;
+        
+        
+       }
+
+
 }
