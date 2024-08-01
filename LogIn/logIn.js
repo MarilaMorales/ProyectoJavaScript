@@ -20,7 +20,6 @@ btnEnviar.addEventListener("click", function() {
     }
 
     // Verificar si la contraseña es incorrecta
-
     if (user.contrasena1 !== contrasenaLog) {
         loginError.textContent = "Contraseña Incorrecta";
         document.getElementById("correoLog").value = "";

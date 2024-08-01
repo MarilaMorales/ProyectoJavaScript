@@ -1,8 +1,8 @@
     let btnEnviar = document.getElementById("btnEnviar");
     
-    btnEnviar.addEventListener("click", function() {
+    btnEnviar.addEventListener("click", function(event) {
+        event.preventDefault();
 
-        
         // Obtener los valores ingresados por el usuario
         let usuario2 = document.getElementById("usuario1").value;
         let correo2 = document.getElementById("correo1").value;
@@ -30,5 +30,6 @@
         localStorage.setItem(correo2, JSON.stringify(user));   
 
         alert("Usuario registrado correctamente.");
-        window.location.href = "../LogIn/LogIn.html";
+        window.location.href = "../LogIn/LogIn.html";   
+    
     });

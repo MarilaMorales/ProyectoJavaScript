@@ -1,6 +1,6 @@
-
 let contenedorEventos = document.getElementById("contenedorEventos");
 let contenedorTareas = document.getElementById("contenedorTareas");
+
 
 // Cargar eventos y tareas desde localStorage cuando se carga la página
 cargarEventos();
@@ -16,14 +16,16 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
     let eventoInput = document.getElementById("evento").value;// Obtener los valores de los campos de entrada
     let fechaEventoInput = document.getElementById("fechaEvento").value;
 
-    // Verificar que ambos campos no estén vacíos
+
+
     if (eventoInput !== "" && fechaEventoInput !== "") {
 
         // Se cargan los eventos desde el Local para validarlas
-        let eventosGuardados= JSON.parse(localStorage.getItem("eventos"));
+        let eventosGuardados= JSON.parse(localStorage.getItem("eventos")); 
 
         if (eventosGuardados === null) {
             eventosGuardados = [];
+
         }
 
         // Validar si el evento ya está registrado
@@ -69,7 +71,9 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
         // Limpiar los campos de entrada
         document.getElementById("evento").value = "";
         document.getElementById("fechaEvento").value = "";
+        
     } else {
+
         // Mostrar alerta si algún campo está vacío
         alert("Por favor, completa todos los campos del evento.");
     }
@@ -78,7 +82,6 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
 
 
 // -------------------------------- Guardar un Evento en LocalStorage-------------------
-
 
 
 // Función para guardar un evento en localStorage
@@ -110,7 +113,7 @@ function cargarEventos() {
             eventoDiv.className = "evento";
             eventoDiv.textContent = "Evento: " + evento.evento + " " + " // Fecha: " + evento.fecha + " ";
 
-            // Crear el botón de eliminar y editar para el evento
+            // Crear el botón de eliminar y editar 
             let btnEliminarEvento = document.createElement("button");
             btnEliminarEvento.textContent = "Eliminar";
             btnEliminarEvento.addEventListener('click', function() {
@@ -177,6 +180,7 @@ function editarEvento(evento, fecha, eventoDiv) {
         btnEliminarEvento.textContent = "Eliminar";
         btnEliminarEvento.addEventListener('click', function() {
             eliminarEvento(nuevoEvento, nuevaFecha, nuevoEventoDiv);
+
         });
 
         let btnEditarEvento = document.createElement("button");
@@ -195,11 +199,11 @@ function editarEvento(evento, fecha, eventoDiv) {
 }
 
 
-
+cargarTareas();
 //------------------------------------ Funcion de Agregar Tareas-------------------------------------------
 
 
-// Funcion para agregar una nueva tarea
+
 document.getElementById('btnAgregarTarea').addEventListener('click', function() {
     // Obtener los valores de los campos de entrada
     let tareaInput = document.getElementById("tarea").value;
@@ -216,8 +220,6 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
     }
 
 
-
-
     // Verificar que la tarea no esté vacía y que al menos una prioridad esté seleccionada
     if (tareaInput !== "" && prioridades.length > 0) {
 
@@ -225,10 +227,14 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         // Se cargan las tareas desde el Local para validarlas
         let tareasGuardadas= JSON.parse(localStorage.getItem("tareas"));
   
+        
+        if (tareasGuardadas === null) {
+            tareasGuardadas = [];
+        }
 
         // Ver si la tarea ya está registrada
         let tareaExistente = false;
-        for (let  i= 0; i < tareasGuardadas.length; ii++) {
+        for (let  i= 0; i < tareasGuardadas.length; i++) {
             if (tareasGuardadas[i].tarea === tareaInput) {
                 tareaExistente = true;
                 alert("La tarea ya está registrada");
@@ -276,7 +282,6 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         alert("Por favor, completa todos los campos de la tarea.");
     }
 });
-
 
 
 //------------------------------- Funcion para Guardar Tarea en Local------------------------
@@ -361,8 +366,6 @@ function editarTarea(tarea, prioridades, tareaElemento) {
             nuevasPrioridades[i] = nuevasPrioridades[i].trim();
         }
         
-
-
         // Eliminar la tarea antigua
         eliminarTarea(tarea, prioridades, tareaElemento);
 
