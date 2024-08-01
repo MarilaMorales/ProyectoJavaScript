@@ -110,14 +110,14 @@ function cargarEventos() {
             eventoDiv.className = "evento";
             eventoDiv.textContent = "Evento: " + evento.evento + " " + " // Fecha: " + evento.fecha + " ";
 
-            // Crear el botón de eliminar para el evento
+            // Crear el botón de eliminar y editar para el evento
             let btnEliminarEvento = document.createElement("button");
             btnEliminarEvento.textContent = "Eliminar";
             btnEliminarEvento.addEventListener('click', function() {
                 eliminarEvento(evento.evento, evento.fecha, eventoDiv);
             });
 
-            // Crear el botón de editar para el evento
+            
             let btnEditarEvento = document.createElement("button");
             btnEditarEvento.textContent = "Editar";
             btnEditarEvento.addEventListener('click', function() {
