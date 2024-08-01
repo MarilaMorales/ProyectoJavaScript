@@ -198,7 +198,7 @@ function editarEvento(evento, fecha, eventoDiv) {
 }
 
 
-cargarTareas();
+
 //------------------------------------ Funcion de Agregar Tareas-------------------------------------------
 
 
