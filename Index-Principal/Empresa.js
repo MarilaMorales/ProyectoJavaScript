@@ -225,7 +225,8 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         // Se cargan las tareas desde el Local para validarlas
         let tareasGuardadas= JSON.parse(localStorage.getItem("tareas"));
   
-        // Validar si la tarea ya está registrada
+
+        // Ver si la tarea ya está registrada
         let tareaExistente = false;
         for (let  i= 0; i < tareasGuardadas.length; ii++) {
             if (tareasGuardadas[i].tarea === tareaInput) {
@@ -241,14 +242,14 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
         tareaElemento.className = "tarea";
         tareaElemento.textContent = "Tarea: " + tareaInput + " - Prioridades: " + prioridades.join(', ');
 
-        // Crear el botón de eliminar para la tarea
+
+        // Crear el botón de eliminar y el de editar la tarea
         let btnEliminarTarea = document.createElement("button");
         btnEliminarTarea.textContent = "Eliminar";
         btnEliminarTarea.addEventListener('click', function() {
             eliminarTarea(tareaInput, prioridades, tareaElemento);
         });
 
-        // Crear el botón de editar para la tarea
         let btnEditarTarea = document.createElement("button");
         btnEditarTarea.textContent = "Editar";
         btnEditarTarea.addEventListener('click', function() {
@@ -271,12 +272,16 @@ document.getElementById('btnAgregarTarea').addEventListener('click', function() 
             prioridadesSelect.options[i].selected = false;
         }
     } else {
-        // Mostrar alerta si algún campo está vacío
+        
         alert("Por favor, completa todos los campos de la tarea.");
     }
 });
 
-// Función para guardar una tarea en localStorage
+
+
+//------------------------------- Funcion para Guardar Tarea en Local------------------------
+
+
 function guardarTarea(tarea, prioridades) {
     let tareas = JSON.parse(localStorage.getItem("tareas"));
     if (tareas === null) {
@@ -286,7 +291,8 @@ function guardarTarea(tarea, prioridades) {
     localStorage.setItem("tareas", JSON.stringify(tareas));
 }
 
-// Función para cargar tareas desde localStorage
+//------------------------------- Funcion para Cargar Tarea en Local------------------------
+
 function cargarTareas() {
     let tareas = JSON.parse(localStorage.getItem("tareas"));
     if (tareas !== null) {
@@ -322,8 +328,9 @@ function cargarTareas() {
     }
 }
 
+//------------------------------- Funcion para Eliminar Tarea------------------------
 
-// Función para eliminar una tarea
+
 function eliminarTarea(tarea, prioridades, tareaElemento) {
     let tareas = JSON.parse(localStorage.getItem('tareas'));
     if (tareas !== null) {
@@ -335,13 +342,17 @@ function eliminarTarea(tarea, prioridades, tareaElemento) {
     }
 }
 
-// Función para editar una tarea
+
+//------------------------------- Funcion para Editar Tarea------------------------
+
+
 function editarTarea(tarea, prioridades, tareaElemento) {
+
     // Solicitar al usuario los nuevos valores para la tarea
     let nuevaTarea = prompt("Edita la tarea:", tarea);
     let nuevasPrioridadesTemp = prompt("Edita las prioridades de la tarea (separadas por coma):", prioridades.join(','));
 
-        //
+        
     if (nuevaTarea !== null && nuevasPrioridadesTemp !== null) {
         let nuevasPrioridades = nuevasPrioridadesTemp.split(',');
 
