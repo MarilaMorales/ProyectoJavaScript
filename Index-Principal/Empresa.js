@@ -21,17 +21,17 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
     if (eventoInput !== "" && fechaEventoInput !== "") {
 
         // Se cargan los eventos desde el Local para validarlas
-        let eventosGuardados= JSON.parse(localStorage.getItem("eventos")); 
+        let eventosLocal= JSON.parse(localStorage.getItem("eventos")); 
 
-        if (eventosGuardados === null) {
-            eventosGuardados = [];
+        if (eventosLocal === null) {
+            eventosLocal = [];
 
         }
 
         // Validar si el evento ya está registrado
         let eventoExiste = false;
-        for (let  i= 0; i < eventosGuardados.length; i++) {
-            if (eventosGuardados[i].evento === eventoInput) {
+        for (let  i= 0; i < eventosLocal.length; i++) {
+            if (eventosLocal[i].evento === eventoInput) {
                 eventoExiste = true;
                 alert("Ya hay un evento con ese nombre");
                 return;
@@ -71,11 +71,10 @@ document.getElementById('btnAgregarEvento').addEventListener('click', function()
         // Limpiar los campos de entrada
         document.getElementById("evento").value = "";
         document.getElementById("fechaEvento").value = "";
-        
     } else {
 
         // Mostrar alerta si algún campo está vacío
-        alert("Por favor, completa todos los campos del evento.");
+        alert("Completa todos los campos del evento.");
     }
 });
 
