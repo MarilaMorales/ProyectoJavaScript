@@ -1,10 +1,10 @@
-
-
-body{
-    background-color: rgb(218, 237, 230)!important;
+/* Estilos globales */
+body {
+    background-color: #DAEDE6 !important;
+    font-family: 'Arial', sans-serif;
 }
 
-
+/* Header */
 .header {
     height: 12rem;
     margin-bottom: 3rem;
@@ -13,6 +13,7 @@ body{
     border-bottom:white solid 2px;
 }
 
+/* Contenedor del header */
 .headerConteiner {
     display: grid;
     grid-template-columns: 25% 50% 25%;
@@ -39,169 +40,161 @@ body{
     margin-top: 1rem;
 }
 
-#imageSeas{
-    margin-top: 1rem;
+.logoHeader img:hover {
+    transform: scale(1.1);
 }
 
-.tituloAdministracion {
-    display: flex;
-    justify-content: space-around;
+/* Título */
+.tituloHeader {
+    text-align: center;
+    padding: 0.5rem;
+    color: #184a62;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
-.tabNavegador ul li a{
-    background-color: rgba(57, 144, 112, 0.462)!important;
-    
+/* Menú de navegación */
+.tabNavegador ul li a {
+    background-color: rgba(57, 144, 112, 0.7) !important;
+    color: white !important;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-left: 8px !important;
 }
 
-
-.eventoConteiner{
-    margin-top: 2rem;
-    margin-bottom: 3rem !important ;
+.tabNavegador ul li a:hover {
+    background-color: rgb(126, 206, 177) !important;
 }
 
-.contenedorEventos{
-    display: flex;
-    justify-content: space-around !important;
-}
-
-.containerEvento{
-    margin-bottom: 3rem;
-}
-
-.contenedorEventos button{
+/* Botones */
+button {
     border-radius: 0.6rem;
-
-}
-.evento{
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
-    font-family: sans-serif;
-}
-
-.evento button{
-    
-    border-radius: 0.6rem;
-    margin-left: 1rem !important;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #399070;
+    color: white;
     font-size: 1rem;
-    
-
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.tarea{
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
-    font-family: sans-serif;
+button:hover {
+    background-color: #2d7560;
+    transform: scale(1.05);
 }
 
-
-.tarea button{
-    margin: 0.5rem !important;
-    border-radius: 0.6rem;
+/* Eventos */
+.contenedorEventos {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
-#h2Titulo{
-    margin-top: 3rem;
+.containerEvento {
     margin-bottom: 3rem;
-}
-
-
-.footer2{
-    height: 18rem;
-    display: grid;
-    grid-template: 1fr 1fr/25% 50% 20%;
-    justify-content: space-around;
-    background-color: #184a62;
-    background-size: cover; 
-    margin-top: 8rem;
-   
-}
-
-.footerTexto{
-    display: flex;
-    justify-content: center;
-    grid-column: 2;
-    grid-row: 1;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     height: 4rem;
-    margin-top: 2rem;
 }
 
-.footerTexto2{
-    grid-column: 2;
-    font-size: 1.3rem;
-    justify-content: center;
-    color: rgb(209, 224, 222);
-    text-align: justify;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.btnFooter{
-    background-color: rgb(107, 211, 211);
-    width: 12rem;
+.evento, .tarea {
     display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
+    justify-content: space-between; /* Distribuye el contenido */
+    align-items: center; /* Alinea verticalmente */
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.evento button, .tarea button {
+    margin-left: 90px; /* Espacio entre botones */
+
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    justify-content:flex-end ;
+}
+
+button {
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Estilo para los botones específicos */
+button:nth-child(2) { /* Botón de eliminar */
+    background-color: #6b151dba;
+    color: white;
+}
+
+button:nth-child(3) { /* Botón de editar */
+    background-color: #0c7a66e4;
+    color: white;
 }
 
 
-@media (max-width:700px){
 
+.containerEvento:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+.footer2 {
+    background-color: #184a62;
+    color: white;
+    padding: 2rem;
+    margin-top: 8rem;
+    text-align: center;
+}
+
+.footerTexto2 {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Botón del footer */
+.btnFooter {
+    background-color: #6bd3d3;
+    width: 12rem;
+    padding: 0.7rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btnFooter:hover {
+    background-color: #55b1b1;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
     .headerConteiner {
-        display: grid;
         grid-template-columns: 25% 75%;
     }
-    
-    .logoHeader {
-        grid-column: 1;
-        object-fit: contain;
-        margin-right: 4rem;
-       
-    }
-    
-    
+
     .logoHeader img {
-        grid-column: 1;
-        width: 9rem;
+        width: 7rem;
     }
-    
+
     .tituloHeader {
-        grid-column: 2;
-      object-fit: contain;
+        font-size: 1.4rem;
     }
 
-    .tituloHeader img{
-        width: 18rem;
-        align-items: end;
+    .footer2 {
+        height: auto;
+        padding: 1.5rem;
     }
-
-    .containerEvento{
-        display: flex;
-        flex-direction: column;
-        margin-top: 0.5rem;
-
-      }
-    .containerEvento input{
-        margin-top: 0.4rem;
-        margin-bottom: 0.3;
-      }
-
-    #btnAgregarEvento{
-        margin-top: 0.5rem;
-        border-radius: 0.6rem;
-      }
-
-    .evento{
-        display: flex;
-        flex-direction: column;
-        font-size: 1.2rem;
-        border-radius: 0.6rem;
-      }
-    .evento button{
-        width: 30%;
-        align-self: center;
-       
-      }
 
     .footerTexto2{
         display: flex;
